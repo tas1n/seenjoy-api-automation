@@ -1,0 +1,16 @@
+{
+  "name": "seenjoy-api-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "courses.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
