@@ -1,0 +1,57 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/login"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"wronguser\",\r
+
+    \    \"password\": \"wrongpassword\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 401\", () => {\r
+
+      \    pm.expect(pm.response.code).to.eql(401);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response contains the correct message\", () => {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.message).to.eql(\"Invalid credentials\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"response time\", () =>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000); \r
+
+      })\r
+
+      \r
+
+      pm.test(\"Content-Type header is present\", ()=>{\r
+
+      \    pm.response.to.have.header('Content-Type');\r
+
+      })\r
+
+      \r
+
+      pm.test(\"Content-Type header has application/json; charset=utf-8 \",
+      ()=>{\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('applica\
+      tion/json; charset=utf-8')\r
+
+      })"
+    language: text/javascript
+order: 2000

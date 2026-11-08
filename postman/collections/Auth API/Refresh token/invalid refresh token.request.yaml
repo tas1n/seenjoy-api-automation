@@ -1,0 +1,43 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/refresh"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"refreshToken\": \"this is an invalid token\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 401\", function () {\r
+
+      \    pm.response.to.have.status(401);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"response time\", ()=>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Content-Type header is present\", ()=>{\r
+
+      \    pm.response.to.have.header('Content-Type');\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Content-Type header has application/json; charset=utf-8 \", ()=>{\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('application/json; charset=utf-8');\r
+
+      });"
+    language: text/javascript
+order: 3000

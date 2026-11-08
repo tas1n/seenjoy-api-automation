@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/reset-token/{token}"
+method: GET
+body:
+  type: json
+  content: ""
+order: 1000

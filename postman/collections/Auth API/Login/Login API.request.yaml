@@ -1,0 +1,61 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/login"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"username\": \"saiydur19\",\r
+
+    \  \"password\": \"Janina@018\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: |-
+      const jsonData = pm.response.json();
+
+      // Only set tokens if the response is successful
+      if (pm.response.code === 200) {
+          pm.environment.set("access_token", jsonData.accessToken);
+          console.log(pm.environment.get("access_token"));
+          pm.environment.set("refresh_token", jsonData.refreshToken);
+          console.log(pm.environment.get("refresh_token"));
+      }
+
+      pm.test("Status code is 200 or 429", () => {
+          pm.expect(pm.response.code).to.be.oneOf([200, 429]);
+      });
+
+      // Only run these tests if the response is 200
+      if (pm.response.code === 200) {
+          pm.test("Response contains accessToken", () => {
+              pm.expect(jsonData).to.have.property('accessToken');
+          });
+
+          pm.test("accessToken is not empty", () => {
+              pm.expect(jsonData.accessToken).to.not.be.empty;
+          });
+
+          pm.test("accessToken is a string", () => {
+              pm.expect(jsonData.accessToken).to.be.a('string');
+          });
+
+          pm.test("refreshToken is a string", () => {
+              pm.expect(jsonData.refreshToken).to.be.a('string');
+          });
+      }
+
+      pm.test("response time", () => {
+          pm.expect(pm.response.responseTime).to.be.below(2000);
+      });
+
+      pm.test("Content-Type header is present", () => {
+          pm.response.to.have.header('Content-Type');
+      });
+
+      pm.test("Content-Type header has application/json; charset=utf-8 ", () => {
+          pm.expect(pm.response.headers.get("Content-Type")).to.eql('application/json; charset=utf-8');
+      });
+    language: text/javascript
+order: 1000

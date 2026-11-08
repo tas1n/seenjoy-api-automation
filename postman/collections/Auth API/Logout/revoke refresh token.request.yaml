@@ -1,0 +1,41 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/logout"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"refreshToken\": \"{{refresh_token}}\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 204\", function () {\r
+
+      \    pm.response.to.have.status(204);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response body is empty\", function () {\r
+
+      \    pm.expect(pm.response.text()).to.be.empty;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time\", () =>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      })\r
+
+      pm.test(\"Content-Type header is absent\", ()=>{\r
+
+      \    pm.response.to.not.have.header(\"Content-Type\");\r
+
+      });\r\n"
+    language: text/javascript
+order: 1000
