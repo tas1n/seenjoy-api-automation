@@ -57,5 +57,25 @@ scripts:
       pm.test("Content-Type header has application/json; charset=utf-8 ", () => {
           pm.expect(pm.response.headers.get("Content-Type")).to.eql('application/json; charset=utf-8');
       });
+
+      const schema = {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ]
+      }
+      pm.test("Schema is valid", () => {
+          pm.expect(tv4.validate(jsonData, schema)).to.be.true;
+      });
     language: text/javascript
 order: 1000

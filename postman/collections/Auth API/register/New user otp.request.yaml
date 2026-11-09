@@ -1,0 +1,58 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/register/otp"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Jane Doe\",\r
+
+    \  \"email\": \"ummaytasin05@gmail.com\",\r
+
+    \  \"whatsapp\": \"+8801712345678\",\r
+
+    \  \"phone\": \"+8801712345678\",\r
+
+    \  \"password\": \"S3curePassw0rd!\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: |-
+      const jsonData = pm.response.json();
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+      pm.test("Content-Type is present", function () {
+          pm.response.to.have.header("Content-Type");
+      });
+      pm.test("Response time is less than 5000ms", function () {
+          pm.expect(pm.response.responseTime).to.be.below(5000);
+      });
+
+      const schema = {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "expiresInSeconds": {
+            "type": "integer"
+          },
+          "resendInSeconds": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "email",
+          "expiresInSeconds",
+          "resendInSeconds"
+        ]
+      }
+
+      pm.test("Schema is valid", ()=>{
+          pm.expect(tv4.validate(jsonData, schema)).to.be.true;
+      })
+    language: text/javascript
+order: 888

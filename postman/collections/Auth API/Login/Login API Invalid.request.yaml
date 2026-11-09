@@ -12,7 +12,11 @@ body:
     }"
 scripts:
   - type: afterResponse
-    code: "pm.test(\"Status code is 401\", () => {\r
+    code: "const jsonData = pm.response.json();\r
+
+      \r
+
+      pm.test(\"Status code is 401\", () => {\r
 
       \    pm.expect(pm.response.code).to.eql(401);\r
 
@@ -46,12 +50,66 @@ scripts:
 
       \r
 
-      pm.test(\"Content-Type header has application/json; charset=utf-8 \",
-      ()=>{\r
+      pm.test(\"Content-Type header has application/json; charset=utf-8 \", ()=>{\r
 
-      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('applica\
-      tion/json; charset=utf-8')\r
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('application/json; charset=utf-8')\r
 
-      })"
+      })\r
+
+      \r
+
+      const schema = {\r
+
+      \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r
+
+      \  \"type\": \"object\",\r
+
+      \  \"properties\": {\r
+
+      \    \"statusCode\": {\r
+
+      \      \"type\": \"integer\"\r
+
+      \    },\r
+
+      \    \"timestamp\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"path\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"message\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    }\r
+
+      \  },\r
+
+      \  \"required\": [\r
+
+      \    \"statusCode\",\r
+
+      \    \"timestamp\",\r
+
+      \    \"path\",\r
+
+      \    \"message\"\r
+
+      \  ]\r
+
+      }\r
+
+      pm.test(\"Schema is valid\", () => {\r
+
+      \    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r
+
+      });"
     language: text/javascript
 order: 2000

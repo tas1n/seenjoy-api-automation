@@ -1,0 +1,57 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/reset-password"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"token\": \"invalid123\",\r
+
+    \  \r
+
+    \  \"password\": \"Janina@018\",\r
+
+    \  \"username\": \"saiydur19\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 400\", () =>  {\r
+
+      \    pm.response.to.have.status(400);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response contains the correct message\", () => {\r
+
+      \    pm.expect(pm.response.json().message).to.eql(\"Invalid or expired password reset link\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"response time\", ()=>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000); \r
+
+      })\r
+
+      \r
+
+      pm.test(\"Content-Type is present\", ()=> {\r
+
+      \    pm.response.to.have.header('Content-Type');\r
+
+      })\r
+
+      \r
+
+      pm.test(\"Content-Type is application/json\", () => {\r
+
+      \    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json; charset=utf-8');\r
+
+      \    })"
+    language: text/javascript
+order: 1000

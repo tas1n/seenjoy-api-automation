@@ -1,0 +1,75 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/register/otp"
+method: POST
+body:
+  type: json
+  content: "{\"name\":\"Humaira\",\r
+
+    \"email\":\"humairatasin79@gmail.com\",\r
+
+    \"whatsapp\":\"+8801633713759\",\r
+
+    \"phone\":\"+8801633713759\",\r
+
+    \"password\":\"11111111\"}"
+scripts:
+  - type: afterResponse
+    code: |-
+      const jsonData = pm.response.json();
+
+      pm.test("Status code is 409)", () => {
+          pm.response.to.have.status(409);
+      });
+
+      pm.test("Response time is less than 2000ms", () => {
+          pm.expect(pm.response.responseTime).to.be.below(2000);
+      });
+
+      pm.test("Content-Type header is present", () => {
+          pm.response.to.have.header("Content-Type");
+      });
+
+      pm.test("Content-Type is application/json; charset=utf-8", () => {
+          pm.expect(pm.response.headers.get("Content-Type")).to.eql("application/json; charset=utf-8");
+      });
+
+      pm.test("Response message indicates user already exists", () => {
+          pm.expect(jsonData.message).to.be.a("string").and.to.have.length.above(0);
+      });
+
+      const schema = {
+         
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "whatsapp": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "whatsapp",
+          "phone",
+          "password"
+        ]
+
+      };
+
+      pm.test("Response schema is valid", () => {
+          pm.expect(tv4.validate(jsonData, schema)).to.be.true;
+      });
+    language: text/javascript
+order: 1000

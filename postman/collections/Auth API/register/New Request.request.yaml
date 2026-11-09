@@ -1,0 +1,119 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/auth/register"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Jane Doe\",\r
+
+    \  \"email\": \"ummaytasin05@gmail.com\",\r
+
+    \  \"whatsapp\": \"+8801712345678\",\r
+
+    \  \"phone\": \"+8801712345678\",\r
+
+    \  \"password\": \"S3curePassw0rd!\",\r
+
+    \  \"utmSource\": \"facebook\",\r
+
+    \  \"utmMedium\": \"paid_social\",\r
+
+    \  \"utmCampaign\": \"august-launch\",\r
+
+    \  \"utmTerm\": \"adset-women-25-34\",\r
+
+    \  \"utmContent\": \"video-ad-01\",\r
+
+    \  \"lastUtmSource\": \"instagram\",\r
+
+    \  \"lastUtmMedium\": \"paid_social\",\r
+
+    \  \"lastUtmCampaign\": \"retargeting-week-2\",\r
+
+    \  \"lastUtmTerm\": \"adset-lookalike\",\r
+
+    \  \"lastUtmContent\": \"carousel-02\",\r
+
+    \  \"landingPage\": \"/courses/speak-to-win\",\r
+
+    \  \"referrer\": \"https://l.facebook.com/\",\r
+
+    \  \"otp\": \"947538\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const jsonData = pm.response.json();\r
+
+      \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Content-Type is present\", function () {\r
+
+      \    pm.response.to.have.header(\"Content-Type\");\r
+
+      });\r
+
+      pm.test(\"Content-Type is application/json; charset=utf-8\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json; charset=utf-8\");  \r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time is less than 200ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(200);\r
+
+      });\r
+
+      \r
+
+      const schema =\r
+
+      {\r
+
+      \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r
+
+      \  \"type\": \"object\",\r
+
+      \  \"properties\": {\r
+
+      \    \"accessToken\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"refreshToken\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    }\r
+
+      \  },\r
+
+      \  \"required\": [\r
+
+      \    \"accessToken\",\r
+
+      \    \"refreshToken\"\r
+
+      \  ]\r
+
+      }\r
+
+      pm.test(\"Schema is valid\", ()=>{\r
+
+      \    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r
+
+      })"
+    language: text/javascript
+order: 2000

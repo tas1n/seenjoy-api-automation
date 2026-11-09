@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/users/cmw980x2c001401lp4f9qshx3"
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 7000

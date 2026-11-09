@@ -12,7 +12,11 @@ body:
     }"
 scripts:
   - type: afterResponse
-    code: "pm.test(\"Status code is 400\", ()=>{\r
+    code: "const jsonData = pm.response.json();\r
+
+      \r
+
+      pm.test(\"Status code is 400\", ()=>{\r
 
       \    pm.response.to.have.status(400);\r
 
@@ -22,8 +26,7 @@ scripts:
 
       pm.test(\"Response contains expected message\", () => {\r
 
-      \    pm.expect(pm.response.json().message).to.include(\"password must be
-      longer than or equal to 8 characters\");\r
+      \    pm.expect(pm.response.json().message).to.include(\"password must be longer than or equal to 8 characters\");\r
 
       });\r
 
@@ -37,12 +40,76 @@ scripts:
 
       \r
 
-      pm.test(\"Content-Type header has application/json; charset=utf-8 \",
-      ()=>{\r
+      pm.test(\"Content-Type header has application/json; charset=utf-8 \", ()=>{\r
 
-      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('applica\
-      tion/json; charset=utf-8')\r
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql('application/json; charset=utf-8')\r
 
-      })"
+      })\r
+
+      \r
+
+      const schema ={\r
+
+      \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r
+
+      \  \"type\": \"object\",\r
+
+      \  \"properties\": {\r
+
+      \    \"statusCode\": {\r
+
+      \      \"type\": \"integer\"\r
+
+      \    },\r
+
+      \    \"timestamp\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"path\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"message\": {\r
+
+      \      \"type\": \"array\",\r
+
+      \      \"items\": [\r
+
+      \        {\r
+
+      \          \"type\": \"string\"\r
+
+      \        }\r
+
+      \      ]\r
+
+      \    }\r
+
+      \  },\r
+
+      \  \"required\": [\r
+
+      \    \"statusCode\",\r
+
+      \    \"timestamp\",\r
+
+      \    \"path\",\r
+
+      \    \"message\"\r
+
+      \  ]\r
+
+      }\r
+
+      pm.test(\"Schema is valid\", () => {\r
+
+      \    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r
+
+      });"
     language: text/javascript
 order: 3000
