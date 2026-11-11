@@ -1,8 +1,28 @@
 $kind: http-request
-url: "{{seenjoy_url}}/v1/users/cmw980x2c001401lp4f9qshx3"
+url: "{{seenjoy_url}}/v1/users/cmwbrjbkw001e01lp98iwm09j"
 method: DELETE
 auth:
   type: bearer
   credentials:
     token: "{{access_token}}"
 order: 7000
+scripts:
+  - type: afterResponse
+    code: |-
+      
+      pm.test("Status code is 204 No Content", function () {
+          pm.response.to.have.status(204);
+      });
+
+      pm.test("Response time is less than 2000ms", function () {
+          pm.expect(pm.response.responseTime).to.be.below(2000);
+      });
+
+      pm.test("Response body is empty", function () {
+          pm.expect(pm.response.text()).to.be.empty;
+      });
+
+      pm.test("Request was authenticated with Bearer token", function () {
+          pm.expect(pm.request.headers.get("Authorization")).to.include("Bearer");
+      });
+    language: text/javascript

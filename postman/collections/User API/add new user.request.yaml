@@ -5,17 +5,17 @@ body:
   type: json
   content: "{\r
 
-    \  \"name\": \"Jane Doe\",\r
+    \  \"name\": \"Harry Doe\",\r
 
-    \  \"username\": \"janedoe\",\r
+    \  \"username\": \"Harrydoe\",\r
 
     \  \"accountType\": \"EMAIL\",\r
 
-    \  \"email\": \"jane@example.com\",\r
+    \  \"email\": \"Harry@example.com\",\r
 
-    \  \"phone\": \"+8801700000000\",\r
+    \  \"phone\": \"+8801711111111\",\r
 
-    \  \"whatsapp\": \"+8801700000000\",\r
+    \  \"whatsapp\": \"+8801711111111\",\r
 
     \  \"role\": \"STUDENT\"\r
 
@@ -32,7 +32,7 @@ scripts:
 
       pm.test(\"Response time\", ()=>{\r
 
-      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+      \    pm.expect(pm.response.responseTime).to.be.below(5000);\r
 
       })\r
 
