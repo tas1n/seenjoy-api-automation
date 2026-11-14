@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/categories/{{id}}"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Successful delete catagory\", () => {\r
+
+      \    pm.expect(pm.response.code).to.be.oneOf([204,404]);\r
+
+      });\r
+
+      pm.test(\"Response time\", () =>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      })\r\n"
+    language: text/javascript
+order: 3000

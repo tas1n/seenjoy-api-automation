@@ -1,0 +1,50 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/enrollments/cms7zd4ge000401mk6g1b3j9z/send-email"
+method: POST
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time\", () =>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      })\r
+
+      pm.test(\"Content-Type is present\", ()=>{\r
+
+      \    pm.response.to.have.header(\"Content-Type\");\r
+
+      })\r
+
+      \r
+
+      pm.test(\"Content-Type is application/json; charset=utf-8\", ()=>{\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json; charset=utf-8\");\r
+
+      \    })\r
+
+      \r
+
+      pm.test(\"Response body contains sent: true\", function () {\r
+
+      \    pm.expect(pm.response.json().sent).to.be.true;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response body contains correct email\", function () {\r
+
+      \    pm.expect(pm.response.json().email).to.equal(\"saiydur.cse@gmail.com\");\r
+
+      });"
+    language: text/javascript
+order: 4000

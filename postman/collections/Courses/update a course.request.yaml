@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{seenjoy_url}}/v1/courses/cmwc3935m002201lpnwhnqocg"
+url: "{{seenjoy_url}}/v1/courses/cmwgbwmif002401lpobnrrn2m"
 method: PATCH
 body:
   type: json

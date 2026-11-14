@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/cmwgbwmif002401lpobnrrn2m"
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 204\", ()=>{\r
+
+      \    pm.expect(pm.response.code).to.eql(204) \r
+
+      })\r
+
+      \r
+
+      pm.test(\"Response body is empty\", () => {\r
+
+      \    pm.expect(pm.response.text()).to.eql(\"\")\r
+
+      })\r
+
+      \r
+
+      pm.test(\"Response time\", ()=>{\r
+
+      \    pm.expect(pm.response.responseTime).to.below(2000)\r
+
+      })"
+    language: text/javascript
+order: 8000
