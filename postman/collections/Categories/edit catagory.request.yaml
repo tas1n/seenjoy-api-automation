@@ -3,11 +3,7 @@ url: "{{seenjoy_url}}/v1/categories/{{id}}"
 method: PATCH
 body:
   type: json
-  content: "{\r
-
-    \    \"slug\": \"_marketing_\"\r
-
-    }"
+  content: "{\r\n    \"slug\": \"{{slug}}\"\r\n}"
 scripts:
   - type: afterResponse
     code: "const schema ={\r

@@ -1,0 +1,15 @@
+$kind: collection
+description: ""
+variables:
+  - key: json_web_token_0sng
+    secret: true
+    disabled: false
+  - key: json_web_token_0z89
+    secret: true
+    disabled: false
+auth:
+  - id: 058bcf70-bdf1-4e04-b3e1-8b193ec645c3
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{access_token}}"

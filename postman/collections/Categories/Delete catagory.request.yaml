@@ -13,6 +13,16 @@ scripts:
 
       \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
 
-      })\r\n"
+      })\r
+
+      \r
+
+      pm.environment.unset(\"nameBn\");\r
+
+      pm.environment.unset(\"nameEn\");\r
+
+      pm.environment.unset(\"slug\");\r
+
+      pm.environment.unset(\"id\");"
     language: text/javascript
 order: 3000

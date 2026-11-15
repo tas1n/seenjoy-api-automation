@@ -114,6 +114,11 @@ scripts:
 
       \    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r
 
-      })"
+      })\r
+
+      \r\n"
+    language: text/javascript
+  - type: beforeRequest
+    code: ""
     language: text/javascript
 order: 2000

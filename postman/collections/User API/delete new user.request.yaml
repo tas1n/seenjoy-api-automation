@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{seenjoy_url}}/v1/users/cmwbrjbkw001e01lp98iwm09j"
+url: "{{seenjoy_url}}/v1/users/{{userId}}"
 method: DELETE
 auth:
   type: bearer

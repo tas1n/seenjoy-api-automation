@@ -1,0 +1,39 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/{{courseId}}/orders"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"utmSource\": \"facebook\",\r
+
+    \  \"utmMedium\": \"paid_social\",\r
+
+    \  \"utmCampaign\": \"august-launch\",\r
+
+    \  \"utmTerm\": \"adset-women-25-34\",\r
+
+    \  \"utmContent\": \"video-ad-01\",\r
+
+    \  \"lastUtmSource\": \"instagram\",\r
+
+    \  \"lastUtmMedium\": \"paid_social\",\r
+
+    \  \"lastUtmCampaign\": \"retargeting-week-2\",\r
+
+    \  \"lastUtmTerm\": \"adset-lookalike\",\r
+
+    \  \"lastUtmContent\": \"carousel-02\",\r
+
+    \  \"landingPage\": \"/courses/speak-to-win\",\r
+
+    \  \"referrer\": \"https://l.facebook.com/\",\r
+
+    \  \"promoCode\": \"EARLYBIRD20\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: //pm.environment.set("orderId", pm.response.json().orderId);
+    language: text/javascript
+order: 4000

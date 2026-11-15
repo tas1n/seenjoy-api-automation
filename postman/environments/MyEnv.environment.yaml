@@ -6,5 +6,21 @@ values:
     value: ''
   - key: refresh_token
     value: ''
-  - key: id
+  - key: email
+    value: ''
+  - key: phone
+    value: ''
+  - key: userId
+    value: ''
+  - key: courseId
+    value: ''
+  - key: titleEn
+    value: ''
+  - key: titleBan
+    value: ''
+  - key: titleBn
+    value: ''
+  - key: slug
+    value: ''
+  - key: orderId
     value: ''

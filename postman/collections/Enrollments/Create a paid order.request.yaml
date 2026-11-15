@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/enrollments"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"userId\": \"{{userId}}\",\r
+
+    \  \"courseId\": \"{{courseId}}\",\r
+
+    \  \"paymentMethod\": \"BKASH\",\r
+
+    \  \"transactionId\": \"9KQ7XH2M1A\",\r
+
+    \  \"sendEmail\": true\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: ""
+    language: text/javascript
+order: 6000

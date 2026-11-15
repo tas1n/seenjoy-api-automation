@@ -7,11 +7,11 @@ body:
 
     {\r
 
-    \  \"titleEn\": \"Basic Freelancing\",\r
+    \  \"titleEn\": \"{{titleEn}}\",\r
 
-    \  \"titleBn\": \"ফ্রিল্যান্সিং পরিচিতি\",\r
+    \  \"titleBn\": \"{{titleBn}}\",\r
 
-    \  \"slug\": \"introduction-to-freelancing-test-02\",\r
+    \  \"slug\": \"{{slug}}\",\r
 
     \  \"basePrice\": 5000,\r
 
@@ -54,6 +54,25 @@ scripts:
 
       });\r
 
-      \r\n"
+      \r
+
+      pm.environment.set(\"courseId\", pm.response.json().id);"
+    language: text/javascript
+  - type: beforeRequest
+    code: "let random = Math.random().toString(36).substring(2);\r
+
+      let titleEn = \"Test course\"+random;\r
+
+      let titleBn = \"কোর্স টেস্ট\" + random;\r
+
+      let slug = random;\r
+
+      \r
+
+      pm.environment.set(\"titleEn\", titleEn);\r
+
+      pm.environment.set(\"titleBn\", titleBn);\r
+
+      pm.environment.set(\"slug\", slug);"
     language: text/javascript
 order: 6000

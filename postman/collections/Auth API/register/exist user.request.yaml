@@ -14,7 +14,7 @@ body:
     \"password\":\"11111111\"}"
 scripts:
   - type: afterResponse
-    code: |-
+    code: |+
       const jsonData = pm.response.json();
 
       pm.test("Status code is 409)", () => {
@@ -37,39 +37,5 @@ scripts:
           pm.expect(jsonData.message).to.be.a("string").and.to.have.length.above(0);
       });
 
-      const schema = {
-         
-        "$schema": "http://json-schema.org/draft-04/schema#",
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "whatsapp": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "email",
-          "whatsapp",
-          "phone",
-          "password"
-        ]
-
-      };
-
-      pm.test("Response schema is valid", () => {
-          pm.expect(tv4.validate(jsonData, schema)).to.be.true;
-      });
     language: text/javascript
 order: 1000
