@@ -3,9 +3,7 @@ values:
   - key: seenjoy_url
     value: ''
   - key: access_token
-    value: ''
-  - key: refresh_token
-    value: ''
+    secret: true
   - key: email
     value: ''
   - key: phone

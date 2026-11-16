@@ -5,17 +5,17 @@ body:
   type: json
   content: "{\r
 
-    \  \"name\": \"Harry Doe\",\r
+    \  \"name\": \"{{name}}\",\r
 
-    \  \"username\": \"Harrydoe\",\r
+    \  \"username\": \"{{username}}\",\r
 
     \  \"accountType\": \"EMAIL\",\r
 
-    \  \"email\": \"Harry@example.com\",\r
+    \  \"email\": \"{{email}}\",\r
 
-    \  \"phone\": \"+8801711111111\",\r
+    \  \"phone\": \"{{phone}}\",\r
 
-    \  \"whatsapp\": \"+8801711111111\",\r
+    \  \"whatsapp\": \"{{phone}}\",\r
 
     \  \"role\": \"STUDENT\"\r
 
@@ -55,6 +55,16 @@ scripts:
       pm.environment.set(\"userId\", pm.response.json().id);"
     language: text/javascript
   - type: beforeRequest
-    code: "\r\n\r\n"
+    code: "let random = Math.random().toString(36).substring(2);\r
+
+      \r
+
+      let name = \"umaay\"+random;\r
+
+      let username= \"Humu\"+random;\r
+
+      let email = \"umaay\" + random + \"@example.com\";\r
+
+      let phone= \"+8801\" + Math.floor(100000000 + Math.random() * 900000000);"
     language: text/javascript
 order: 5000

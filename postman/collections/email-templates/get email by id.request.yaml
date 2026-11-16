@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/email-templates/{{userId}}"
+method: GET
+order: 4000

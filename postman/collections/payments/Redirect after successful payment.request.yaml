@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/payments/sslcommerz/success"
+method: POST
+order: 9000

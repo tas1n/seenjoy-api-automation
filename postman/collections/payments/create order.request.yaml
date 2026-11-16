@@ -3,37 +3,117 @@ url: "{{seenjoy_url}}/v1/courses/{{courseId}}/orders"
 method: POST
 body:
   type: json
-  content: "{\r
+  content: "{\"utmSource\":\"facebook\",\r
 
-    \  \"utmSource\": \"facebook\",\r
+    \"utmMedium\":\"paid_social\",\r
 
-    \  \"utmMedium\": \"paid_social\",\r
+    \"utmCampaign\":\"august-launch\",\r
 
-    \  \"utmCampaign\": \"august-launch\",\r
+    \"utmTerm\":\"adset-women-25-34\",\r
 
-    \  \"utmTerm\": \"adset-women-25-34\",\r
+    \"utmContent\":\"video-ad-01\",\r
 
-    \  \"utmContent\": \"video-ad-01\",\r
+    \"lastUtmSource\":\"instagram\",\r
 
-    \  \"lastUtmSource\": \"instagram\",\r
+    \"lastUtmMedium\":\"paid_social\",\r
 
-    \  \"lastUtmMedium\": \"paid_social\",\r
+    \"lastUtmCampaign\":\"retargeting-week-2\",\r
 
-    \  \"lastUtmCampaign\": \"retargeting-week-2\",\r
+    \"lastUtmTerm\":\"adset-lookalike\",\r
 
-    \  \"lastUtmTerm\": \"adset-lookalike\",\r
+    \"lastUtmContent\":\"carousel-02\",\r
 
-    \  \"lastUtmContent\": \"carousel-02\",\r
+    \"landingPage\":\"/courses/speak-to-win\",\r
 
-    \  \"landingPage\": \"/courses/speak-to-win\",\r
+    \"referrer\":\"https://l.facebook.com/\"\r
 
-    \  \"referrer\": \"https://l.facebook.com/\",\r
-
-    \  \"promoCode\": \"EARLYBIRD20\"\r
+    \r
 
     }"
 scripts:
   - type: afterResponse
-    code: //pm.environment.set("orderId", pm.response.json().orderId);
+    code: "pm.environment.set(\"orderId\", pm.response.json().orderId);\r
+
+      \r
+
+      const schema=\r
+
+      {\r
+
+      \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r
+
+      \  \"type\": \"object\",\r
+
+      \  \"properties\": {\r
+
+      \    \"orderId\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"orderNumber\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"redirectUrl\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"amount\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    },\r
+
+      \    \"currency\": {\r
+
+      \      \"type\": \"string\"\r
+
+      \    }\r
+
+      \  },\r
+
+      \  \"required\": [\r
+
+      \    \"orderId\",\r
+
+      \    \"orderNumber\",\r
+
+      \    \"redirectUrl\",\r
+
+      \    \"amount\",\r
+
+      \    \"currency\"\r
+
+      \  ]\r
+
+      }\r
+
+      pm.test(\"Schema is valid\", ()=>{\r
+
+      \    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r
+
+      })\r
+
+      \r
+
+      pm.test(\"Status code is 201\", () => {\r
+
+      \    pm.response.to.have.status(201);   \r
+
+      \    })\r
+
+      \r
+
+      pm.test(\"Response time is less than 5000\", ()=>{\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(5000); \r
+
+      })"
     language: text/javascript
 order: 4000

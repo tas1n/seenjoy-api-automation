@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{seenjoy_url}}/v1/courses/by-slug/introduction-to-freelancing-test-01"
+url: "{{seenjoy_url}}/v1/courses/by-slug/speak-to-win"
 method: GET
 scripts:
   - type: afterResponse
