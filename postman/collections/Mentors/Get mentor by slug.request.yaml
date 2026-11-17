@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/mentors/by-slug/seenjoy-saha"
+method: GET
+order: 5000

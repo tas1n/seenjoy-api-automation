@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{seenjoy_url}}/v1/users/cmw93afm9001301lp9sn55v70"
+url: "{{seenjoy_url}}/v1/users/{{userId}}"
 method: GET
 auth:
   type: bearer

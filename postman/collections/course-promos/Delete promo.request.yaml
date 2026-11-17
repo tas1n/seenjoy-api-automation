@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/{{courseId}}/promos/cmwkdu4q3003x01lpz8jkexfx"
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 204\", function () {\r
+
+      \    pm.response.to.have.status(204);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time is less than 2000ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"response boy is empty\", ()=>{\r
+
+      \    pm.expect(pm.response.text()).to.be.empty;\r
+
+      })"
+    language: text/javascript
+order: 2000

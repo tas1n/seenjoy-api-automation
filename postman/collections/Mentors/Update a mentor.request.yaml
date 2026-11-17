@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/mentors/cmwkfnb1c004101lpmg0mp90u"
+method: PATCH
+body:
+  type: json
+  content: " {\r
+
+    \    \"slug\": \"Jane-marketing-consultant\"\r
+
+    \    }"
+order: 6000

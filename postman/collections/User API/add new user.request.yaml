@@ -65,6 +65,12 @@ scripts:
 
       let email = \"umaay\" + random + \"@example.com\";\r
 
-      let phone= \"+8801\" + Math.floor(100000000 + Math.random() * 900000000);"
+      let phone = \"+8801\" + Math.floor(10000000 + Math.random() * 90000000);\r
+
+      \r
+
+      pm.variables.set(\"phone\", phone);\r
+
+      pm.variables.set(\"whatsapp\", phone);"
     language: text/javascript
 order: 5000

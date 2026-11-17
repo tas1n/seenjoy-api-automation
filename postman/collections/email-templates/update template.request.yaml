@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/{{courseId}}/email-templates/{{type}}"
+method: PUT
+order: 5000
