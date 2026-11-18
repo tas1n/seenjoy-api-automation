@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/media/confirm"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"key\": \"6be28aa9-00cd-4fce-a492-ebe8f8ffb1be-random.png\"\r
+
+    }"
+order: 2000

@@ -28,3 +28,13 @@ values:
     value: ''
   - key: mentorId
     value: ''
+  - key: mentorSlug
+    value: ''
+  - key: FAQId
+    value: ''
+  - key: reviewId
+    value: ''
+  - key: testimonialId
+    value: ''
+  - key: user_storyId
+    value: ''

@@ -1,0 +1,7 @@
+$kind: collection
+auth:
+  - id: acbc44f0-2435-49eb-80ef-ad4bfd4be02e
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{access_token}}"

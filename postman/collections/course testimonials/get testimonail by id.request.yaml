@@ -1,0 +1,28 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/{{courseId}}/testimonials/{{testimonialId}}"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "\r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Content-Type is present\", function () {\r
+
+      \    pm.response.to.have.header(\"Content-Type\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Content type is application/json; charset=utf-8\", ()=>{\r
+
+      \    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r
+
+      })"
+    language: text/javascript
+order: 4000

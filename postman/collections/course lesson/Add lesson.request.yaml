@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/{{courseId}}/lessons"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Setting up your freelance profile\",\r
+
+    \  \"type\": \"VIDEO\",\r
+
+    \  \"routineId\": \"string\",\r
+
+    \  \"videoId\": \"string\",\r
+
+    \  \"durationSeconds\": 0,\r
+
+    \  \"order\": 0,\r
+
+    \  \"isFreePreview\": false\r
+
+    }"
+order: 1000

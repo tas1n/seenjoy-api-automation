@@ -3,9 +3,9 @@ url: "{{seenjoy_url}}/v1/mentors/{{mentorId}}"
 method: DELETE
 scripts:
   - type: afterResponse
-    code: "pm.test(\"Status code is 200\", function () {\r
+    code: "pm.test(\"Status code is 204\", function () {\r
 
-      \    pm.response.to.have.status(200);\r
+      \    pm.response.to.have.status(204);\r
 
       });\r
 

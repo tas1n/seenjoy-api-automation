@@ -1,0 +1,49 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/courses/{{courseId}}/faqs"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"questionEn\": \"Do I get lifetime access?\",\r
+
+    \  \"questionBn\": \"আমি কি লাইফটাইম অ্যাক্সেস পাব?\",\r
+
+    \  \"answerEn\": \"Yes, once enrolled you have lifetime access to this course.\",\r
+
+    \  \"answerBn\": \"হ্যাঁ, একবার ভর্তি হলে আপনি এই কোর্সে লাইফটাইম অ্যাক্সেস পাবেন।\",\r
+
+    \  \"order\": 0\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.environment.set(\"FAQId\", pm.response.json().id);\r
+
+      \r
+
+      pm.test(\"Status code is 201\", function () {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });\r
+
+      pm.test(\"Content-Type is present\", function () {\r
+
+      \    pm.response.to.have.header(\"Content-Type\");\r
+
+      });\r
+
+      pm.test(\"COntent-Type is application/json\", ()=>{\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r
+
+      })\r
+
+      pm.test(\"Response time is less than 2000ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      });\r\n"
+    language: text/javascript
+order: 1000

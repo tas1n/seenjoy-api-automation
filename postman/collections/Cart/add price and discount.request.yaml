@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/cart/quote"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"courseIds\": [\r
+
+    \    \"{{courseId}}\"\r
+
+    \  ],\r
+
+    \  \"promoCode\": \"EARLYBIRD20\"\r
+
+    }"
+order: 5000

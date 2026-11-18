@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{seenjoy_url}}/v1/media/cms1wgpaf000101ke494igvwx"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 204\", function () {\r
+
+      \    pm.response.to.have.status(204);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time is less than 2000ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(2000);\r
+
+      });"
+    language: text/javascript
+order: 4000

@@ -35,6 +35,10 @@ scripts:
 
       \    pm.expect(pm.response.json().limit).to.eql(20)\r
 
-      })"
+      })\r
+
+      \r
+
+      pm.environment.set(\"mentorSlug\", pm.response.json().data[1].slug);"
     language: text/javascript
 order: 2000

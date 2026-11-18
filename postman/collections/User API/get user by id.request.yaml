@@ -131,7 +131,7 @@ scripts:
 
       pm.test(\"Schema is valid\", ()=>{\r
 
-      \     pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r
+      \    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r
 
       })\r
 
